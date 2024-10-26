@@ -44,9 +44,6 @@ There are no specific commands for players. The plugin works automatically.
 - The plugin has a maximum speed limit to maintain game balance
 - Works only for human players, does not affect bots
 
-## Support
-For support or to report issues, please open an issue on the [GitHub repository](https://github.com/IIBladeII).
-
 ## License
 This plugin is under the GPL license. See the [LICENSE](LICENSE) file for more information.
 
