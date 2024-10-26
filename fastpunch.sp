@@ -1,4 +1,4 @@
-// © [Blade](https://github.com/IIBladeII), [2024]. Todos os direitos reservados.
+// © [Blade](https://github.com/IIBladeII), [2024]. All rights reserved.
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -16,13 +16,13 @@ ConVar g_cvPunchSpeedMultiplier;
 public Plugin myinfo = {
     name = "Fast Punches NMRIH",
     author = "IIBladeII",
-    description = "Permite que os jogadores soqueiem mais rápido no NMRIH",
+    description = "Allows players to punch faster in NMRIH",
     version = PLUGIN_VERSION,
     url = "https://github.com/IIBladeII"
 };
 
 public void OnPluginStart() {
-    g_cvPunchSpeedMultiplier = CreateConVar("sm_fastpunch_multiplier", "1.1", "Multiplicador de velocidade do soco", FCVAR_NOTIFY, true, 1.0, true, MAX_MULTIPLIER);
+    g_cvPunchSpeedMultiplier = CreateConVar("sm_fastpunch_multiplier", "1.1", "Punch speed multiplier", FCVAR_NOTIFY, true, 1.0, true, MAX_MULTIPLIER);
     AutoExecConfig(true, "fastpunch", "sourcemod");
 
     HookEvent("player_spawn", Event_PlayerSpawn);
