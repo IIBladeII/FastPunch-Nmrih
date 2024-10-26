@@ -1,3 +1,5 @@
+// © [Blade](https://github.com/IIBladeII), [2024]. Todos os direitos reservados.
+
 #pragma semicolon 1
 #pragma newdecls required
 
@@ -6,6 +8,7 @@
 #include <sdkhooks>
 
 #define PLUGIN_VERSION "1.0.2"
+#define MAX_MULTIPLIER 1.5
 
 // Configurable punch speed
 ConVar g_cvPunchSpeedMultiplier;
@@ -13,13 +16,13 @@ ConVar g_cvPunchSpeedMultiplier;
 public Plugin myinfo = {
     name = "Fast Punches NMRIH",
     author = "IIBladeII",
-    description = "Allows players to punch faster in NMRIH",
+    description = "Permite que os jogadores soqueiem mais rápido no NMRIH",
     version = PLUGIN_VERSION,
     url = "https://github.com/IIBladeII"
 };
 
 public void OnPluginStart() {
-    g_cvPunchSpeedMultiplier = CreateConVar("sm_fastpunch_multiplier", "1.1", "Punch speed multiplier", FCVAR_NOTIFY, true, 1.0);
+    g_cvPunchSpeedMultiplier = CreateConVar("sm_fastpunch_multiplier", "1.1", "Multiplicador de velocidade do soco", FCVAR_NOTIFY, true, 1.0, true, MAX_MULTIPLIER);
     AutoExecConfig(true, "fastpunch", "sourcemod");
 
     HookEvent("player_spawn", Event_PlayerSpawn);
@@ -56,7 +59,9 @@ public void OnPreThink(int client) {
         if (nextAttack > gameTime)
         {
             float timeDifference = nextAttack - gameTime;
-            float newNextAttack = gameTime + (timeDifference / g_cvPunchSpeedMultiplier.FloatValue);
+            float multiplier = g_cvPunchSpeedMultiplier.FloatValue;
+            multiplier = (multiplier > MAX_MULTIPLIER) ? MAX_MULTIPLIER : multiplier;
+            float newNextAttack = gameTime + (timeDifference / multiplier);
             SetEntPropFloat(activeWeapon, Prop_Send, "m_flNextPrimaryAttack", newNextAttack);
         }
     }
